@@ -11,6 +11,7 @@ $adress = '12 rue de la porte';
 $cp = '02500';
 $country = 'Hirson';
 $mail = 'Jeam.M@truc.fr';
+$dateJ = null;
 
 $server = 'localhost';
 $user = 'root';
@@ -27,13 +28,13 @@ try {
     ");
 
     $stm->execute([
-        ':nom' => $name,
-        ':fname' => $fname,
-        ':adress' => $adress,
-        ':postalCode' => $cp,
-        ':counrty' => $country,
-        ':mail' => $mail,
-        ':datejoin' => null,
+        $stm->bindParam(':nom' ,$name),
+        $stm->bindParam(':fname' ,$fname),
+        $stm->bindParam(':adress' ,$adress),
+        $stm->bindParam(':postalCode' ,$cp),
+        $stm->bindParam(':country' ,$country),
+        $stm->bindParam(':mail' ,$mail),
+        $stm->bindParam(':datejoin' ,$dateJ),
     ]);
     echo "L'utilisateur a étais ajouté !";
 }
