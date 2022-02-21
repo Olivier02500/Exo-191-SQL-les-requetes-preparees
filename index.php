@@ -8,10 +8,10 @@
 $name = 'Jean';
 $fname = 'michel';
 $adress = '12 rue de la porte';
-$cp = '02500';
+$cp = '02';
 $country = 'Hirson';
 $mail = 'Jeam.M@truc.fr';
-$dateJ = null;
+
 
 $server = 'localhost';
 $user = 'root';
@@ -23,19 +23,17 @@ try {
     $bdd = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $user, $pass);
 
     $stm = $bdd->prepare("
-    INSERT INTO user (nom, fname, address, postal_code, country, mail, date_join)
-    VALUES (:nom ,:fname ,:adress ,:postalCode , :country ,:mail , :dateJoin)
+    INSERT INTO user (nom, fname, address, postal_code, country, mail)
+    VALUES (:nom ,:fname ,:adress ,:postalCode , :country ,:mail )
     ");
 
-    $stm->execute([
-        $stm->bindParam(':nom' ,$name),
-        $stm->bindParam(':fname' ,$fname),
-        $stm->bindParam(':adress' ,$adress),
-        $stm->bindParam(':postalCode' ,$cp),
-        $stm->bindParam(':country' ,$country),
-        $stm->bindParam(':mail' ,$mail),
-        $stm->bindParam(':datejoin' ,$dateJ),
-    ]);
+    $stm->bindParam(':name',$name);
+    $stm->bindParam(':fname',$fname);
+    $stm->bindParam(':address',$address);
+    $stm->bindParam(':postal_code',$postal_code);
+    $stm->bindParam(':country',$country);
+    $stm->bindParam(':mail',$mail);
+    $stm->execute();
     echo "L'utilisateur a étais ajouté !";
 }
 catch (PDOException $e){
